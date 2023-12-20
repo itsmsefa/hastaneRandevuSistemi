@@ -2,7 +2,91 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-left">
+    <h5 class="display-4">Welcome to SAU Medical</h5>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <a asp-controller = "MakeAnAppointment" asp-action = "MakeAnAppointment" class="card mb-4 shadow-sm">
+                <img src="" class="card-img-left" alt="Placeholder Image">
+                <div class="card-body">
+                    <h5 class="card-title">Make Hospital Appointment</h5>
+                    <p class="card-text">You can make an appointment from the clinics in the hospital.</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-md">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Your Appointments</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Current Appointment</h6>
+                                <small>Appointment Date</small>
+                            </div>
+                            <p class="mb-1">Doctor: Dr. John Doe</p>
+                            <small>Clinic: Clinic Name</small>
+                        </a>
+                        <!-- Add more list items for other current appointments -->
+        
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Past Appointment</h6>
+                                <small>Appointment Date</small>
+                            </div>
+                            <p class="mb-1">Doctor: Dr. Sarah Smith</p>
+                            <small>Clinic: Clinic Name</small>
+                        </a>
+                        <!-- Add more list items for other past appointments -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form>
+                <div class="form-group">
+                    <label for="citySelect">City</label>
+                    <select class="form-control" id="citySelect">
+                        <option value="">Select City</option>
+                        <!-- Populate this list dynamically with cities -->
+                        <option value="city1">City 1</option>
+                        <option value="city2">City 2</option>
+                        <!-- Add more cities as needed -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="districtSelect">District</label>
+                    <select class="form-control" id="districtSelect">
+                        <option value="">Select District</option>
+                        <!-- Populate this list dynamically based on city selection -->
+                        <!-- For example: when city1 is selected, show its districts -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="clinicSelect">Clinic</label>
+                    <select class="form-control" id="clinicSelect">
+                        <option value="">Select Clinic</option>
+                        <!-- Populate this list dynamically based on district selection -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="hospitalSelect">Hospitals</label>
+                    <select class="form-control" id="hospitalSelect">
+                        <option value="">Select Hospital</option>
+                        <!-- Populate this list dynamically based on clinic selection -->
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Search Appointment</button>
+            </form>
+        </div>
+    </div>
 </div>

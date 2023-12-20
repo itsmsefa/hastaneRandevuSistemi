@@ -97,7 +97,7 @@ namespace hastaneRandevuSistemi.Controllers
                     //email
                     await _emailSender.SendEmailAsync(user.Email, "Confirm your email address", $"Please confirm your account by clicking this <a href='https://localhost:7156{url}'>link</a>.");
 
-                    TempData["message"] = "Confirm your email address by clicking the link we sent to your email address";
+                    TempData["message"] = "Confirm your email address by clicking the link we sent to your email address!";
                     return RedirectToAction("Login", "Account");
                 }
 
@@ -124,7 +124,7 @@ namespace hastaneRandevuSistemi.Controllers
 
                 if(result.Succeeded)
                 {
-                    TempData["message"] = "Your email address is confirmed";
+                    TempData["message"] = "Your email address is confirmed.";
                     return RedirectToAction("Login", "Account");
                 }
             }
@@ -133,5 +133,81 @@ namespace hastaneRandevuSistemi.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login");
+        }
+
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(String Email)
+        {
+            if(string.IsNullOrEmpty(Email))
+            {
+                TempData["message"] = "Please enter your email address";
+                return View();
+            }
+            var user = await _userManager.FindByEmailAsync(Email);
+
+
+            if(user != null)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var url = Url.Action("ResetPassword", "Account", new {user.Id, token});
+
+                //email
+                await _emailSender.SendEmailAsync(Email, "Reset your password", $"Please reset your password by clicking this <a href='https://localhost:7156{url}'>link</a>.");
+
+                TempData["message"] = "Reset link has been sent to your email address";
+                return RedirectToAction("Login", "Account");
+            }
+
+            TempData["message"] = "There is not a user linked to this emal! Please register first.";
+            return View("Create");
+        }
+
+        public IActionResult ResetPassword(string Id, string token)
+        {
+            if(Id == null || token == null)
+            {
+                TempData["message"] = "Invalid token";
+                return RedirectToAction("Login");
+            }
+            var model = new ResetPasswordViewModel {Token = token};
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if(user == null)
+                {
+                    TempData["message"] = "User not found!";
+                    return RedirectToAction("Login");
+                }
+
+                var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+
+                if(result.Succeeded)
+                {
+                    TempData["message"] = "Your password has been resetted!";
+                    return RedirectToAction("Login");
+                }
+
+                foreach(IdentityError err in result.Errors)
+                {
+                    ModelState.AddModelError("", err.Description);
+                }
+            }
+            return View(model);
+        }
     }
 }
