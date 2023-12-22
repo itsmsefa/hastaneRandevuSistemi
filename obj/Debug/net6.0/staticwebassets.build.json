@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2lB1H8ZkXhAjYpo4CbTr6zJ23OT8UWYAXOB44K48o+Y=",
+  "Hash": "HC5yqcCH6b8uysPVl0edHNvOmat/ztSmYLiB6z4It/Y=",
   "Source": "hastaneRandevuSistemi",
   "BasePath": "_content/hastaneRandevuSistemi",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Sefa\\OneDrive - ogr.sakarya.edu.tr\\Masaüstü\\hastaneRandevuSistemi\\wwwroot\\hospital-logo-icon-png.ico",
+      "SourceId": "hastaneRandevuSistemi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Sefa\\OneDrive - ogr.sakarya.edu.tr\\Masaüstü\\hastaneRandevuSistemi\\wwwroot\\",
+      "BasePath": "_content/hastaneRandevuSistemi",
+      "RelativePath": "hospital-logo-icon-png.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\hospital-logo-icon-png.ico"
     },
     {
       "Identity": "C:\\Users\\Sefa\\OneDrive - ogr.sakarya.edu.tr\\Masaüstü\\hastaneRandevuSistemi\\wwwroot\\js\\site.js",

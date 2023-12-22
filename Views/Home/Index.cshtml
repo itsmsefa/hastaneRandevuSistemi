@@ -9,8 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <a asp-controller = "MakeAnAppointment" asp-action = "MakeAnAppointment" class="card mb-4 shadow-sm">
-                <img src="" class="card-img-left" alt="Placeholder Image">
+            <a asp-controller = "Appointment" asp-action = "Index" class="card mb-4 shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">Make Hospital Appointment</h5>
                     <p class="card-text">You can make an appointment from the clinics in the hospital.</p>
@@ -46,47 +45,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <form>
-                <div class="form-group">
-                    <label for="citySelect">City</label>
-                    <select class="form-control" id="citySelect">
-                        <option value="">Select City</option>
-                        <!-- Populate this list dynamically with cities -->
-                        <option value="city1">City 1</option>
-                        <option value="city2">City 2</option>
-                        <!-- Add more cities as needed -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="districtSelect">District</label>
-                    <select class="form-control" id="districtSelect">
-                        <option value="">Select District</option>
-                        <!-- Populate this list dynamically based on city selection -->
-                        <!-- For example: when city1 is selected, show its districts -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="clinicSelect">Clinic</label>
-                    <select class="form-control" id="clinicSelect">
-                        <option value="">Select Clinic</option>
-                        <!-- Populate this list dynamically based on district selection -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="hospitalSelect">Hospitals</label>
-                    <select class="form-control" id="hospitalSelect">
-                        <option value="">Select Hospital</option>
-                        <!-- Populate this list dynamically based on clinic selection -->
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Search Appointment</button>
-            </form>
         </div>
     </div>
 </div>

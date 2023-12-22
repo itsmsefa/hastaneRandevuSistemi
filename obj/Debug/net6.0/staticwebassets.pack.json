@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Sefa\\OneDrive - ogr.sakarya.edu.tr\\Masaüstü\\hastaneRandevuSistemi\\wwwroot\\hospital-logo-icon-png.ico",
+      "PackagePath": "staticwebassets\\hospital-logo-icon-png.ico"
+    },
+    {
       "Id": "C:\\Users\\Sefa\\OneDrive - ogr.sakarya.edu.tr\\Masaüstü\\hastaneRandevuSistemi\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
