@@ -1,50 +1,50 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
 }
 
 <div class="text-left">
-    <h5 class="display-4">Welcome to SAU Medical</h5>
+  <h5 class="display-4">Welcome to SAU Medical</h5>
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <a asp-controller = "Appointment" asp-action = "Index" class="card mb-4 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Make Hospital Appointment</h5>
-                    <p class="card-text">You can make an appointment from the clinics in the hospital.</p>
-                </div>
-            </a>
-        </div>
-        <div class="col-md">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Your Appointments</h5>
-                </div>
-                <div class="card-body">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action active">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1">Current Appointment</h6>
-                                <small>Appointment Date</small>
-                            </div>
-                            <p class="mb-1">Doctor: Dr. John Doe</p>
-                            <small>Clinic: Clinic Name</small>
-                        </a>
-                        <!-- Add more list items for other current appointments -->
-        
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1">Past Appointment</h6>
-                                <small>Appointment Date</small>
-                            </div>
-                            <p class="mb-1">Doctor: Dr. Sarah Smith</p>
-                            <small>Clinic: Clinic Name</small>
-                        </a>
-                        <!-- Add more list items for other past appointments -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="row">
+      <div class="col-md-4">
+          <a asp-controller = "Appointments" asp-action = "Index" class="card mb-4 shadow-sm">
+              <div class="card-body">
+                  <h5 class="card-title">Make Hospital Appointment</h5>
+                  <p class="card-text">You can make an appointment from the clinics in the hospital.</p>
+              </div>
+          </a>
+      </div>
+      <div class="col-md">
+          <div class="card">
+              <div class="card-header">
+                  <h5 class="card-title">Your Appointments</h5>
+              </div>
+              <div class="card-body">
+                  <div class="list-group">
+                      <a href="#" class="list-group-item list-group-item-action active">
+                          <div class="d-flex w-100 justify-content-between">
+                              <h6 class="mb-1">Current Appointment</h6>
+                              <small>Appointment Date</small>
+                          </div>
+                          <p class="mb-1">Doctor: Dr. John Doe</p>
+                          <small>Clinic: Clinic Name</small>
+                      </a>
+                      <!-- Add more list items for other current appointments -->
+      
+                      <a href="#" class="list-group-item list-group-item-action">
+                          <div class="d-flex w-100 justify-content-between">
+                              <h6 class="mb-1">Past Appointment</h6>
+                              <small>Appointment Date</small>
+                          </div>
+                          <p class="mb-1">Doctor: Dr. Sarah Smith</p>
+                          <small>Clinic: Clinic Name</small>
+                      </a>
+                      <!-- Add more list items for other past appointments -->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>

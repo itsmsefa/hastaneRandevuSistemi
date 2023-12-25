@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace hastaneRandevuSistemi.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class UsersController: Controller
     {  
         private UserManager<AppUser> _userManager;

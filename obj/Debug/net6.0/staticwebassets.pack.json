@@ -13,10 +13,6 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\Sefa\\OneDrive - ogr.sakarya.edu.tr\\Masaüstü\\hastaneRandevuSistemi\\wwwroot\\hospital-logo-icon-png.ico",
-      "PackagePath": "staticwebassets\\hospital-logo-icon-png.ico"
-    },
-    {
       "Id": "C:\\Users\\Sefa\\OneDrive - ogr.sakarya.edu.tr\\Masaüstü\\hastaneRandevuSistemi\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
@@ -199,6 +195,14 @@
     {
       "Id": "C:\\Users\\Sefa\\OneDrive - ogr.sakarya.edu.tr\\Masaüstü\\hastaneRandevuSistemi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Sefa\\OneDrive - ogr.sakarya.edu.tr\\Masaüstü\\hastaneRandevuSistemi\\wwwroot\\lib\\daypilot-all.min.d.ts",
+      "PackagePath": "staticwebassets\\lib\\daypilot-all.min.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\Sefa\\OneDrive - ogr.sakarya.edu.tr\\Masaüstü\\hastaneRandevuSistemi\\wwwroot\\lib\\daypilot-all.min.js",
+      "PackagePath": "staticwebassets\\lib\\daypilot-all.min.js"
     },
     {
       "Id": "C:\\Users\\Sefa\\OneDrive - ogr.sakarya.edu.tr\\Masaüstü\\hastaneRandevuSistemi\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",

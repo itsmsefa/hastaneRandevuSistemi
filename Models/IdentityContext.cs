@@ -11,5 +11,10 @@ namespace hastaneRandevuSistemi.Models
         {
 
         }
+
+        public DbSet<City>? City { get; set; }
+        public DbSet<District>? District { get; set; }
+        public DbSet<Hospital>? Hospital { get; set; }
+        public DbSet<Department>? Department { get; set; }
     }
 }

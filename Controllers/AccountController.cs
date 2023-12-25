@@ -167,7 +167,7 @@ namespace hastaneRandevuSistemi.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            TempData["message"] = "There is not a user linked to this emal! Please register first.";
+            TempData["message"] = "There is not a user linked to this email! Please register first.";
             return View("Create");
         }
 

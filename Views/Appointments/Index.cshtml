@@ -1,3 +1,7 @@
+@model CityViewModel
+@{
+    ViewData["Title"] = "Index";
+}
 
 <div class="container">
     <div class="row">
@@ -22,9 +26,9 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="clinicSelect">Clinic</label>
-                    <select class="form-control" id="clinicSelect">
-                        <option value="">Select Clinic</option>
+                    <label for="departmentSelect">Department</label>
+                    <select class="form-control" id="departmentSelect">
+                        <option value="">Select Department</option>
                         <!-- Populate this list dynamically based on district selection -->
                     </select>
                 </div>
@@ -39,4 +43,17 @@
             </form>
         </div>
     </div>
+</div>
+
+<div class="col-md-4">
+    <form asp-controller = "Appointments" asp-action ="Index" method="post" role="form">
+        <div class="form-group">
+            <div class="alert-danger" asp-validation-summary = "ModelOnly"></div>
+            <label asp-for="CityId"></label>
+            <select asp-for = "CityId" class="form-control" asp-items = "@(new SelectList(ViewBag.ListOfCities, "Value", "Text" ))" ></select>
+        </div>
+        <div class="form-group">
+            <input class="btn btn-success" type="submit" value="Submit">
+        </div>
+    </form>
 </div>

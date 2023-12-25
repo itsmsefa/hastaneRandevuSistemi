@@ -27,7 +27,7 @@ namespace hastaneRandevuSistemi.Models
                 {
                     FullName = "Sefa Ozdemir",
                     UserName = adminUser,
-                    Email = "g201210073@sakarya.edu.tr",
+                    Email = "muhammed.ozdemir12@ogr.sakarya.edu.tr",
                     PhoneNumber = "05555555555"
 
                 };
