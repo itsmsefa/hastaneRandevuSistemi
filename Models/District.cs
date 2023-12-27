@@ -15,7 +15,8 @@ namespace hastaneRandevuSistemi.Models
         
         public string? DistrictName { get; set; }
 
-        [ForeignKey("City")]
         public int CityId { get; set; }
+        [ForeignKey("CityId")]
+        public City City { get; set; } = null!;
     }
 }

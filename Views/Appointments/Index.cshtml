@@ -1,59 +1,122 @@
-@model CityViewModel
-@{
-    ViewData["Title"] = "Index";
-}
+@model City
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <form>
-                <div class="form-group">
-                    <label for="citySelect">City</label>
-                    <select class="form-control" id="citySelect">
-                        <option value="">Select City</option>
-                        <!-- Populate this list dynamically with cities -->
-                        <option value="city1">City 1</option>
-                        <option value="city2">City 2</option>
-                        <!-- Add more cities as needed -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="districtSelect">District</label>
-                    <select class="form-control" id="districtSelect">
-                        <option value="">Select District</option>
-                        <!-- Populate this list dynamically based on city selection -->
-                        <!-- For example: when city1 is selected, show its districts -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="departmentSelect">Department</label>
-                    <select class="form-control" id="departmentSelect">
-                        <option value="">Select Department</option>
-                        <!-- Populate this list dynamically based on district selection -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="hospitalSelect">Hospitals</label>
-                    <select class="form-control" id="hospitalSelect">
-                        <option value="">Select Hospital</option>
-                        <!-- Populate this list dynamically based on clinic selection -->
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Search Appointment</button>
-            </form>
-        </div>
-    </div>
-</div>
+<body>
+    <h1>Search for appointments</h1>
+    <form asp-controller = "Appointments" asp-action = "Index" id="form1" name="form1">
+        <h2>Select a city:</h2>
+        <select name="city" id="city" asp-items ='@ViewData["cities"] as List<SelectListItem>' required>
+            <option value="">Please select</option>
+        </select>
 
-<div class="col-md-4">
-    <form asp-controller = "Appointments" asp-action ="Index" method="post" role="form">
-        <div class="form-group">
-            <div class="alert-danger" asp-validation-summary = "ModelOnly"></div>
-            <label asp-for="CityId"></label>
-            <select asp-for = "CityId" class="form-control" asp-items = "@(new SelectList(ViewBag.ListOfCities, "Value", "Text" ))" ></select>
-        </div>
-        <div class="form-group">
-            <input class="btn btn-success" type="submit" value="Submit">
-        </div>
+        <h2>Select district:</h2>
+        <select name="district" id="district" required>
+            <option value="">Please select</option>
+        </select>
+
+        <h2>Select hospital:</h2>
+        <select name="hospital" id="hospital">
+            <option value="">Please select</option>
+        </select>
+
+        <h2>Select a department:</h2>
+        <select name="department" id="department" asp-items='@ViewData["departments"] as List<SelectListItem>' required>
+            <option value="">Please select</option>
+        </select>
+
+        <br><br>
+        <button id="submit" type="submit">Search</button>
     </form>
-</div>
+    <h2>@ViewData["message"]</h2>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async function() 
+        {
+            var city = document.getElementById("city");
+            var district = document.getElementById("district");
+            var hospital = document.getElementById("hospital");
+            district.disabled = true;
+            hospital.disabled = true;
+            submit.disabled = true;
+    
+            city.addEventListener('change', async function(){});
+            district.addEventListener('change', async function(){});
+        });
+    
+        city.addEventListener('change', async function()
+        {
+            if(city.value == "")
+            {
+                district.disabled = true;
+                hospital.disabled = true;
+                submit.disabled = true;
+                return;
+            }
+    
+            const request = new Request('/Appointments/GetDistricts/' + city.value);
+            const options = { method: 'GET' };
+    
+            const response = await fetch(request, options);
+    
+            if(!response.ok)
+            {
+                message.innerHTML = '${response.status} - ${response.statusText}';
+                return;
+            }
+    
+            const json = await response.json();
+    
+            for(var i = district.options.length - 1; i > 0; i--)
+            {
+                district.removeChild(district.options[i]);
+            }
+    
+            json.forEach(function(data)
+            {
+                const option = document.createElement('option');
+                option.value = data.districtId;
+                option.innerHTML = data.districtName;
+                district.appendChild(option);
+            });
+            district.disabled = false;
+        });
+    
+        district.addEventListener('change', async function()
+        {
+            if(district.value == "")
+            {
+                hospital.disabled = true;
+                submit.disabled = true;
+                return;
+            }
+    
+            const request = new Request('/Appointments/GetHospitals/' + district.value);
+            const options = { method: 'GET' };
+    
+            const response = await fetch(request, options);
+    
+            if(!response.ok)
+            {
+                message.innerHTML = '${response.status} - ${response.statusText}';
+                return;
+            }
+    
+            const json = await response.json();
+    
+            for(var i = hospital.options.length - 1; i > 0; i--)
+            {
+                hospital.removeChild(hospital.options[i]);
+            }
+    
+            json.forEach(function(data)
+            {
+                const option = document.createElement('option');
+                option.value = data.hospitalId;
+                option.innerHTML = data.hospitalName;
+                hospital.appendChild(option);
+            });
+            hospital.disabled = false;
+            submit.disabled = false;
+        });
+    </script>
+</body>
+

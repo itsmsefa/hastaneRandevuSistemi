@@ -12,15 +12,9 @@ namespace hastaneRandevuSistemi.Models
     {
         [Key]
         public int AppoinmentId { get; set; }
-
-        public DateTime StartDateTime { get; set; }
-
-        public string? PatientFullName { get; set; }
-
+        public DateTime Apt_Date { get; set; }
         public string? DoctorFullName { get; set; }
-
-        public string? Hospital { get; set; }
-
+        public string? HospitalId { get; set; }
         public string? DepartmentId { get; set; }
 
     }

@@ -63,6 +63,19 @@ namespace hastaneRandevuSistemi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Department",
+                columns: table => new
+                {
+                    DepartmentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Department", x => x.DepartmentId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -168,6 +181,46 @@ namespace hastaneRandevuSistemi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "District",
+                columns: table => new
+                {
+                    DistrictId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DistrictName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CityId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_District", x => x.DistrictId);
+                    table.ForeignKey(
+                        name: "FK_District_City_CityId",
+                        column: x => x.CityId,
+                        principalTable: "City",
+                        principalColumn: "CityId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Hospital",
+                columns: table => new
+                {
+                    HospitalId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HospitalName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DistrictId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hospital", x => x.HospitalId);
+                    table.ForeignKey(
+                        name: "FK_Hospital_District_DistrictId",
+                        column: x => x.DistrictId,
+                        principalTable: "District",
+                        principalColumn: "DistrictId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -206,6 +259,16 @@ namespace hastaneRandevuSistemi.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_District_CityId",
+                table: "District",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Hospital_DistrictId",
+                table: "Hospital",
+                column: "DistrictId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -226,13 +289,22 @@ namespace hastaneRandevuSistemi.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "City");
+                name: "Department");
+
+            migrationBuilder.DropTable(
+                name: "Hospital");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "District");
+
+            migrationBuilder.DropTable(
+                name: "City");
         }
     }
 }

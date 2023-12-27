@@ -56,7 +56,11 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[6.0.23, )"
+            },
+            "jQuery.UI.Combined": {
+              "target": "Package",
+              "version": "[1.13.2, )"
             }
           },
           "imports": [

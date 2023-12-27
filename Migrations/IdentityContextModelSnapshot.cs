@@ -133,6 +133,65 @@ namespace hastaneRandevuSistemi.Migrations
                     b.ToTable("City");
                 });
 
+            modelBuilder.Entity("hastaneRandevuSistemi.Models.Department", b =>
+                {
+                    b.Property<int>("DepartmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DepartmentId"), 1L, 1);
+
+                    b.Property<string>("DepartmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DepartmentId");
+
+                    b.ToTable("Department");
+                });
+
+            modelBuilder.Entity("hastaneRandevuSistemi.Models.District", b =>
+                {
+                    b.Property<int>("DistrictId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DistrictId"), 1L, 1);
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DistrictName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DistrictId");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("District");
+                });
+
+            modelBuilder.Entity("hastaneRandevuSistemi.Models.Hospital", b =>
+                {
+                    b.Property<int>("HospitalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HospitalId"), 1L, 1);
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HospitalName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("HospitalId");
+
+                    b.HasIndex("DistrictId");
+
+                    b.ToTable("Hospital");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -237,6 +296,28 @@ namespace hastaneRandevuSistemi.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("hastaneRandevuSistemi.Models.District", b =>
+                {
+                    b.HasOne("hastaneRandevuSistemi.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("hastaneRandevuSistemi.Models.Hospital", b =>
+                {
+                    b.HasOne("hastaneRandevuSistemi.Models.District", "District")
+                        .WithMany()
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("District");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

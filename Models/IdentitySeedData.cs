@@ -31,7 +31,6 @@ namespace hastaneRandevuSistemi.Models
                     PhoneNumber = "05555555555"
 
                 };
-                
                 await userManager.CreateAsync(user, adminPassword);
             }
         }

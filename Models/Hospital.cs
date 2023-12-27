@@ -12,11 +12,11 @@ namespace hastaneRandevuSistemi.Models
     {
         [Key]
         public int HospitalId { get; set; }
-        
-        [ForeignKey("City")]
-        public int CityId { get; set; }
-        [ForeignKey("Department")]
-        public int DepartmentId { get; set; }
+        [Required]
         public string? HospitalName { get; set; }
+        
+        public int DistrictId { get; set; }
+        [ForeignKey("DistrictId")]
+        public District District { get; set; } = null!;
     }
 }

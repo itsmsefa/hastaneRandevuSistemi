@@ -65,3 +65,6 @@ C:\Users\Sefa\OneDrive - ogr.sakarya.edu.tr\Masaüstü\hastaneRandevuSistemi\obj
 C:\Users\Sefa\OneDrive - ogr.sakarya.edu.tr\Masaüstü\hastaneRandevuSistemi\obj\Debug\net6.0\hastaneRandevuSistemi.pdb
 C:\Users\Sefa\OneDrive - ogr.sakarya.edu.tr\Masaüstü\hastaneRandevuSistemi\obj\Debug\net6.0\hastaneRandevuSistemi.genruntimeconfig.cache
 C:\Users\Sefa\OneDrive - ogr.sakarya.edu.tr\Masaüstü\hastaneRandevuSistemi\obj\Debug\net6.0\ref\hastaneRandevuSistemi.dll
+C:\Users\Sefa\OneDrive - ogr.sakarya.edu.tr\Masaüstü\hastaneRandevuSistemi\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Sefa\OneDrive - ogr.sakarya.edu.tr\Masaüstü\hastaneRandevuSistemi\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Sefa\OneDrive - ogr.sakarya.edu.tr\Masaüstü\hastaneRandevuSistemi\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
