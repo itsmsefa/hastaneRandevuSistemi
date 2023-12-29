@@ -10,11 +10,11 @@ namespace hastaneRandevuSistemi.Models
 
         public static async void IdentityTestUser(IApplicationBuilder app)
         {
-            var context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<IdentityContext>();
+            var _context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<IdentityContext>();
 
-            if(context.Database.GetPendingMigrations().Any())
+            if(_context.Database.GetPendingMigrations().Any())
             {
-                context.Database.Migrate();
+                _context.Database.Migrate();
             }
 
             var userManager = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<UserManager<AppUser>>();

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using hastaneRandevuSistemi.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 

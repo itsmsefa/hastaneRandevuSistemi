@@ -1,122 +1,40 @@
-@model City
+﻿@model SearchViewModel
 
-<body>
-    <h1>Search for appointments</h1>
-    <form asp-controller = "Appointments" asp-action = "Index" id="form1" name="form1">
-        <h2>Select a city:</h2>
-        <select name="city" id="city" asp-items ='@ViewData["cities"] as List<SelectListItem>' required>
-            <option value="">Please select</option>
-        </select>
-
-        <h2>Select district:</h2>
-        <select name="district" id="district" required>
-            <option value="">Please select</option>
-        </select>
-
-        <h2>Select hospital:</h2>
-        <select name="hospital" id="hospital">
-            <option value="">Please select</option>
-        </select>
-
-        <h2>Select a department:</h2>
-        <select name="department" id="department" asp-items='@ViewData["departments"] as List<SelectListItem>' required>
-            <option value="">Please select</option>
-        </select>
-
-        <br><br>
-        <button id="submit" type="submit">Search</button>
-    </form>
-    <h2>@ViewData["message"]</h2>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", async function() 
+<table asp-controller ="Appointments" asp_action ="Search" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Apt_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorFullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HospitalName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SearchResults!)
         {
-            var city = document.getElementById("city");
-            var district = document.getElementById("district");
-            var hospital = document.getElementById("hospital");
-            district.disabled = true;
-            hospital.disabled = true;
-            submit.disabled = true;
-    
-            city.addEventListener('change', async function(){});
-            district.addEventListener('change', async function(){});
-        });
-    
-        city.addEventListener('change', async function()
-        {
-            if(city.value == "")
-            {
-                district.disabled = true;
-                hospital.disabled = true;
-                submit.disabled = true;
-                return;
-            }
-    
-            const request = new Request('/Appointments/GetDistricts/' + city.value);
-            const options = { method: 'GET' };
-    
-            const response = await fetch(request, options);
-    
-            if(!response.ok)
-            {
-                message.innerHTML = '${response.status} - ${response.statusText}';
-                return;
-            }
-    
-            const json = await response.json();
-    
-            for(var i = district.options.length - 1; i > 0; i--)
-            {
-                district.removeChild(district.options[i]);
-            }
-    
-            json.forEach(function(data)
-            {
-                const option = document.createElement('option');
-                option.value = data.districtId;
-                option.innerHTML = data.districtName;
-                district.appendChild(option);
-            });
-            district.disabled = false;
-        });
-    
-        district.addEventListener('change', async function()
-        {
-            if(district.value == "")
-            {
-                hospital.disabled = true;
-                submit.disabled = true;
-                return;
-            }
-    
-            const request = new Request('/Appointments/GetHospitals/' + district.value);
-            const options = { method: 'GET' };
-    
-            const response = await fetch(request, options);
-    
-            if(!response.ok)
-            {
-                message.innerHTML = '${response.status} - ${response.statusText}';
-                return;
-            }
-    
-            const json = await response.json();
-    
-            for(var i = hospital.options.length - 1; i > 0; i--)
-            {
-                hospital.removeChild(hospital.options[i]);
-            }
-    
-            json.forEach(function(data)
-            {
-                const option = document.createElement('option');
-                option.value = data.hospitalId;
-                option.innerHTML = data.hospitalName;
-                hospital.appendChild(option);
-            });
-            hospital.disabled = false;
-            submit.disabled = false;
-        });
-    </script>
-</body>
-
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apt_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoctorFullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HospitalName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

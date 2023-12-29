@@ -1,0 +1,126 @@
+@model dynamic
+
+<body>
+    <h1 style="font-family: Arial, Helvetica, sans-serif;">Search for appointments</h1>
+    <form asp-controller = "Appointments" asp-action = "Search" id="form1" name="form1">
+        <h3>Select a city:</h3>
+        <select name="city" id="city" asp-items ='@ViewData["cities"] as List<SelectListItem>' required>
+            <option value="">Please select</option>
+        </select>
+
+        <h3>Select district:</h3>
+        <select name="district" id="district" required>
+            <option value="">Please select</option>
+        </select>
+
+        <h3>Select hospital:</h3>
+        <select name="hospital" id="hospital">
+            <option value="">Please select</option>
+        </select>
+
+        <h3>Select a department:</h3>
+        <select name="department" id="department" asp-items='@ViewData["departments"] as List<SelectListItem>' required>
+            <option value="">Please select</option>
+        </select><br><br>
+
+        <label for="aptDate"><h3>Appointment Date:</h3></label><br>
+        <input type="date" id="aptDate" name="Apt_Date" required>
+
+        <br><br>
+        <button id="submit" type="submit" value="filter">Search</button>
+    </form>
+
+    <h2>@ViewData["message"]</h2>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async function() 
+        {
+            var city = document.getElementById("city");
+            var district = document.getElementById("district");
+            var hospital = document.getElementById("hospital");
+            district.disabled = true;
+            hospital.disabled = true;
+            submit.disabled = true;
+    
+            city.addEventListener('change', async function(){});
+            district.addEventListener('change', async function(){});
+        });
+    
+        city.addEventListener('change', async function()
+        {
+            if(city.value == "")
+            {
+                district.disabled = true;
+                hospital.disabled = true;
+                submit.disabled = true;
+                return;
+            }
+    
+            const request = new Request('/Appointments/GetDistricts/' + city.value);
+            const options = { method: 'GET' };
+    
+            const response = await fetch(request, options);
+    
+            if(!response.ok)
+            {
+                message.innerHTML = '${response.status} - ${response.statusText}';
+                return;
+            }
+    
+            const json = await response.json();
+    
+            for(var i = district.options.length - 1; i > 0; i--)
+            {
+                district.removeChild(district.options[i]);
+            }
+    
+            json.forEach(function(data)
+            {
+                const option = document.createElement('option');
+                option.value = data.districtId;
+                option.innerHTML = data.districtName;
+                district.appendChild(option);
+            });
+            district.disabled = false;
+        });
+    
+        district.addEventListener('change', async function()
+        {
+            if(district.value == "")
+            {
+                hospital.disabled = true;
+                submit.disabled = true;
+                return;
+            }
+    
+            const request = new Request('/Appointments/GetHospitals/' + district.value);
+            const options = { method: 'GET' };
+    
+            const response = await fetch(request, options);
+    
+            if(!response.ok)
+            {
+                message.innerHTML = '${response.status} - ${response.statusText}';
+                return;
+            }
+    
+            const json = await response.json();
+    
+            for(var i = hospital.options.length - 1; i > 0; i--)
+            {
+                hospital.removeChild(hospital.options[i]);
+            }
+    
+            json.forEach(function(data)
+            {
+                const option = document.createElement('option');
+                option.value = data.hospitalId;
+                option.innerHTML = data.hospitalName;
+                hospital.appendChild(option);
+            });
+            hospital.disabled = false;
+            submit.disabled = false;
+        });
+    </script>
+</body>
+
