@@ -1,40 +1,27 @@
-﻿@model SearchViewModel
+﻿@model dynamic
 
-<table asp-controller ="Appointments" asp_action ="Search" class="table">
-    <thead>
+@if(Model.Appointments.Count > 0)
+{
+    <table>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Apt_Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DoctorFullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HospitalName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DepartmentName)
-            </th>
-            <th></th>
+            <th>Hospital</th>
+            <th>Department</th>
+            <th>Appointment Date</th>
+            <!-- Add other columns as needed -->
         </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.SearchResults!)
+    
+        @foreach(var appointment in Model.Appointments)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Apt_Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DoctorFullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HospitalName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DepartmentName)
-                </td>
+                <td>@appointment.HospitalId</td>
+                <td>@appointment.DepartmentId</td>
+                <td>@appointment.Apt_Date.ToString("dd/MM/yyyy")</td>
+                <!-- Add other data as needed -->
             </tr>
         }
-    </tbody>
-</table>
+    </table>
+}
+else
+{
+    <p>No appointments found.</p>
+}

@@ -12,8 +12,8 @@ using hastaneRandevuSistemi.Models;
 namespace hastaneRandevuSistemi.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20231227222813_FifthCreate")]
-    partial class FifthCreate
+    [Migration("20240101175847_TenthCreate")]
+    partial class TenthCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,12 +33,24 @@ namespace hastaneRandevuSistemi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentId"), 1L, 1);
 
                     b.Property<DateTime>("Apt_Date")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CityName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DepartmentId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DepartmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DistrictName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DoctorFullName")

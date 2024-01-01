@@ -1,8 +1,8 @@
 @model dynamic
 
 <body>
-    <h1 style="font-family: Arial, Helvetica, sans-serif;">Search for appointments</h1>
-    <form asp-controller = "Appointments" asp-action = "Search" id="form1" name="form1">
+    <h1 style="font-family: Arial, Helvetica, sans-serif;">Create appointments</h1>
+    <form asp-controller = "Appointments" asp-action = "Create" id="form1" name="form1">
         <h3>Select a city:</h3>
         <select name="city" id="city" asp-items ='@ViewData["cities"] as List<SelectListItem>' required>
             <option value="">Please select</option>
@@ -27,7 +27,7 @@
         <input type="date" id="aptDate" name="Apt_Date" >
 
         <br><br>
-        <button id="submit" type="submit" value="filter">Search</button>
+        <button id="submit" type="submit" value="Create">Create</button>
     </form>
 
     <h2>@ViewData["message"]</h2>

@@ -4,7 +4,7 @@ namespace hastaneRandevuSistemi.ViewModels
 {
     public class SearchViewModel
     {
-        public List<Appointments> SearchResults { get; set; }
+        public List<Appointments>? SearchResults { get; set; }
         public string? DoctorFullName { get; set; }
         public string? HospitalId { get; set; }
         public string? HospitalName { get; set; }

@@ -5,10 +5,32 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace hastaneRandevuSistemi.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class EightCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Appointments",
+                columns: table => new
+                {
+                    AppointmentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Apt_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CityId = table.Column<int>(type: "int", nullable: false),
+                    CityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DistrictId = table.Column<int>(type: "int", nullable: false),
+                    DistrictName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DoctorFullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HospitalId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HospitalName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DepartmentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Appointments", x => x.AppointmentId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -273,6 +295,9 @@ namespace hastaneRandevuSistemi.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Appointments");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

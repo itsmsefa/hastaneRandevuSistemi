@@ -3,6 +3,8 @@ using hastaneRandevuSistemi.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using hastaneRandevuSistemi.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace hastaneRandevuSistemi.Controllers
 {
@@ -12,6 +14,16 @@ namespace hastaneRandevuSistemi.Controllers
         public AppointmentsController(IdentityContext context)
         {
             _context = context;
+        }
+
+        public IActionResult Index()
+        {
+            var viewModel = new AppointmentsViewModel
+            {
+                Appointments = new List<Appointments>()
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Search()
@@ -31,32 +43,29 @@ namespace hastaneRandevuSistemi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Search(int city, int district, int hospital, int department,int Apt_Date, Appointments appointments)
+        public async Task<IActionResult> Search(string hospital, string department, DateTime? Apt_Date)
         {
-            var cty = _context.City.Find(city);
-            var dst = _context.District.Find(district);
-            var hsp = _context.Hospital.Find(hospital);
-            var dprt = _context.Department.Find(department);
-            var dttm = _context.Appointments.Find(Apt_Date);
+            var query = _context.Appointments.AsQueryable();
 
-            List<City> data = _context.City?.ToList();
-            var cities = (from i in data
-                          select new SelectListItem()
-                          {
-                              Text = i.CityName,
-                              Value = i.CityId.ToString()
-                          }).ToList();
-            ViewData["cities"] = cities;
+            if (!string.IsNullOrEmpty(hospital))
+                query = query.Where(a => a.HospitalId.ToLower() == hospital.ToLower());
 
-            List<Department> dprtdata = _context.Department.ToList();
-            var departments = (from i in dprtdata
-                               select new SelectListItem()
-                               {
-                                   Text = i.DepartmentName,
-                                   Value = i.DepartmentId.ToString()
-                               }).ToList();
-            ViewData["departments"] = departments;
-            return View();
+            if (!string.IsNullOrEmpty(department))
+                query = query.Where(a => a.DepartmentId.ToLower() == department.ToLower());
+
+            if (Apt_Date.HasValue)
+                query = query.Where(a => a.Apt_Date.Date == Apt_Date.Value.Date);
+
+            Console.WriteLine(query.ToQueryString());
+
+            var result = await query.ToListAsync() ?? new List<Appointments>();
+            var viewModel = new AppointmentsViewModel
+            {
+                Appointments = result
+            };
+
+
+            return RedirectToAction("Index", viewModel);
         }
 
         public IActionResult GetDistricts(int id)
@@ -70,5 +79,51 @@ namespace hastaneRandevuSistemi.Controllers
             List<Hospital> data = _context.Hospital.Where(i => i.DistrictId == id).ToList();
             return Ok(data);
         }
+
+        // GET: Appointments/Create
+        public IActionResult Create()
+        {
+            List<City> data = _context.City.ToList();
+            List<Department> dprtdata = _context.Department.ToList();
+
+            var cities = (from i in data select new SelectListItem() { Text = i.CityName, Value = i.CityId.ToString() 
+            }).ToList();
+            ViewData["cities"] = cities;
+
+            var departments = (from i in dprtdata select new SelectListItem() { Text = i.DepartmentName, Value = i.DepartmentId.ToString()
+            }).ToList();
+            ViewData["departments"] = departments;
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(int city, int district, string hospital, string department, DateTime Apt_Date)
+        {
+            if (ModelState.IsValid)
+            {
+                var newAppointment = new Appointments
+                {
+                    CityId = city,
+                    DistrictId = district,
+                    HospitalId = hospital,
+                    DepartmentId = department,
+                    Apt_Date = Apt_Date
+                };
+
+                // Add the new appointment to the database
+                _context.Appointments.Add(newAppointment);
+                await _context.SaveChangesAsync();
+
+                // Redirect to a confirmation page or the index
+                TempData["message"] = "Appointment created successfully!";
+                return RedirectToAction("Create"); // or any other view
+            }
+
+            // If validation fails, reload the form with initial data
+            TempData["message"] = "There has been a problem please try again!";
+            return RedirectToAction("Create");
+        }
+
     }
 }
